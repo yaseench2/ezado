@@ -47,7 +47,7 @@
       .hamburger{display:flex}
     }
 
-    /* HERO (kept design but organized) */
+    /* HERO */
     .wrap{max-width:1180px;margin:28px auto;padding:0 18px}
     .hero{
       display:grid;grid-template-columns:460px 1fr;gap:20px;align-items:center;
@@ -59,7 +59,9 @@
       background:linear-gradient(180deg,#f7fbf7,#eef7f0);display:flex;align-items:center;justify-content:center;
       box-shadow:0 12px 30px rgba(10,20,24,0.04);
     }
-    .hero-visual img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .6s ease, filter .45s ease}
+    .hero-visual img{
+      width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .6s ease, filter .45s ease
+    }
     .hero-visual:hover img{transform:scale(1.03);filter:contrast(1.02) saturate(1.05)}
     .product-frame{
       position:absolute;right:14px;bottom:-18px;width:220px;height:140px;border-radius:12px;padding:10px;
@@ -77,17 +79,41 @@
     .btn-primary{background:linear-gradient(90deg,var(--green),var(--green-dark));color:#fff;padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
     .btn-secondary{background:transparent;border:1px solid rgba(8,15,20,.06);padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;color:#0b1720}
 
+    /* MOBILE HERO ADJUSTMENTS (improved responsiveness for small phones) */
     @media (max-width:980px){
       .hero{grid-template-columns:1fr;padding:14px}
       .hero-visual{height:220px}
-      .product-frame{position:static;width:170px;height:110px;margin-top:8px}
+      /* on small screens, center product-frame and reduce size so it doesn't collide with text */
+      .product-frame{
+        position:absolute;
+        left:50%;
+        transform:translateX(-50%);
+        bottom:-26px;
+        width:160px;
+        height:100px;
+        box-shadow:0 12px 30px rgba(10,20,24,.08);
+      }
+      .product-frame img{object-fit:contain}
+      /* give hero bottom padding so frame doesn't overlap following sections */
+      .hero{padding-bottom:50px}
+    }
+
+    /* extra small phones: ensure hero image shows key area and product frame sits nicely */
+    @media (max-width:420px){
+      .hero-visual{height:190px}
+      .product-frame{width:140px;height:92px;bottom:-22px}
+      .hero{padding-bottom:56px}
+      .hero-content h1{font-size:20px}
+      .hero-content p.lead{font-size:0.95rem}
+      .product-frame img{object-fit:contain}
+      .hero-visual img{object-position:center top}
     }
 
     /* shared small helpers */
     .muted{color:var(--muted)}
     .flex-between{display:flex;justify-content:space-between;align-items:center}
 
-    /* CAROUSEL — only change: show image fully (contain) */
+    /* CAROUSEL (images shown fully) */
     .carousel-wrap{overflow:hidden;margin-top:6px;position:relative}
     .carousel-track{display:flex;gap:14px;transition:transform .45s cubic-bezier(.22,.9,.37,1);will-change:transform}
     .carousel-item{
@@ -117,7 +143,7 @@
     .metric svg{width:64px;height:64px;transform:rotate(-90deg)}
     .value{font-size:1rem;font-weight:700;color:#222}.label{font-size:.86rem;color:#666}
 
-    /* PURCHASE CARDS — only change: make card images fully visible (contain) */
+    /* PURCHASE CARDS */
     .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}
     @media (max-width:1000px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
     @media (max-width:640px){.cards-grid{grid-template-columns:1fr}}
@@ -488,7 +514,7 @@
       layout();
     })();
 
-    /* Metrics animation (runs once when in view) */
+    /* Metrics animation */
     (function metrics(){
       const container = el('#trustMetrics');
       if(!container) return;
@@ -551,7 +577,7 @@
         const saveEls = card.querySelectorAll('.save-amount');
         if(priceCurrent) priceCurrent.textContent = '₹' + fmtINR(sell);
         if(priceOriginal) priceOriginal.textContent = '₹' + fmtINR(orig);
-        saveEls.forEach(elm => elm.textContent = '₹' + fmtINR(save));
+        saveEls.forEach(elm => elm.textContent = '₹' + fmtINR(save);
 
         const numEl = card.querySelector('.num');
         const dec = card.querySelector('.dec');
@@ -573,7 +599,7 @@
       });
     })();
 
-    /* Footer: subscribe & socials */
+    /* Footer interactions */
     function subscribe(){
       const input = el('#emailInput');
       const email = input?.value?.trim();
