@@ -63,12 +63,6 @@
       width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .6s ease, filter .45s ease
     }
     .hero-visual:hover img{transform:scale(1.03);filter:contrast(1.02) saturate(1.05)}
-    .product-frame{
-      position:absolute;right:14px;bottom:-18px;width:220px;height:140px;border-radius:12px;padding:10px;
-      background:linear-gradient(180deg,#fff,#f7f9f8);box-shadow:0 18px 40px rgba(10,20,24,.08);
-      display:flex;align-items:center;justify-content:center;border:1px solid rgba(15,20,20,0.04)
-    }
-    .product-frame img{width:100%;height:100%;object-fit:cover;border-radius:8px}
 
     .hero-content{padding:6px}
     .hero-content h1{margin:0 0 8px;font-size:clamp(22px,3.2vw,34px);line-height:1.02;color:#0b1720;font-weight:900}
@@ -79,33 +73,15 @@
     .btn-primary{background:linear-gradient(90deg,var(--green),var(--green-dark));color:#fff;padding:10px 14px;border-radius:10px;font-weight:800;border:0;cursor:pointer}
     .btn-secondary{background:transparent;border:1px solid rgba(8,15,20,.06);padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;color:#0b1720}
 
-    /* MOBILE HERO ADJUSTMENTS (improved responsiveness for small phones) */
     @media (max-width:980px){
       .hero{grid-template-columns:1fr;padding:14px}
       .hero-visual{height:220px}
-      /* on small screens, center product-frame and reduce size so it doesn't collide with text */
-      .product-frame{
-        position:absolute;
-        left:50%;
-        transform:translateX(-50%);
-        bottom:-26px;
-        width:160px;
-        height:100px;
-        box-shadow:0 12px 30px rgba(10,20,24,.08);
-      }
-      .product-frame img{object-fit:contain}
-      /* give hero bottom padding so frame doesn't overlap following sections */
-      .hero{padding-bottom:50px}
     }
 
-    /* extra small phones: ensure hero image shows key area and product frame sits nicely */
     @media (max-width:420px){
       .hero-visual{height:190px}
-      .product-frame{width:140px;height:92px;bottom:-22px}
-      .hero{padding-bottom:56px}
       .hero-content h1{font-size:20px}
       .hero-content p.lead{font-size:0.95rem}
-      .product-frame img{object-fit:contain}
       .hero-visual img{object-position:center top}
     }
 
@@ -113,7 +89,7 @@
     .muted{color:var(--muted)}
     .flex-between{display:flex;justify-content:space-between;align-items:center}
 
-    /* CAROUSEL (images shown fully) */
+    /* CAROUSEL */
     .carousel-wrap{overflow:hidden;margin-top:6px;position:relative}
     .carousel-track{display:flex;gap:14px;transition:transform .45s cubic-bezier(.22,.9,.37,1);will-change:transform}
     .carousel-item{
@@ -230,9 +206,6 @@
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-visual" aria-hidden="true">
         <img src="./static/images/background.png" alt="EZADO product in action">
-        <div class="product-frame" aria-hidden="true">
-          <img src="./static/images/product 2.png" alt="EZADO bottle">
-        </div>
       </div>
 
       <div class="hero-content">
