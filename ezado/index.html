@@ -577,7 +577,7 @@
         const saveEls = card.querySelectorAll('.save-amount');
         if(priceCurrent) priceCurrent.textContent = '₹' + fmtINR(sell);
         if(priceOriginal) priceOriginal.textContent = '₹' + fmtINR(orig);
-        saveEls.forEach(elm => elm.textContent = '₹' + fmtINR(save);
+        saveEls.forEach(elm => elm.textContent = '₹' + fmtINR(save));
 
         const numEl = card.querySelector('.num');
         const dec = card.querySelector('.dec');
