@@ -122,7 +122,7 @@
     /* PURCHASE CARDS */
     .cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:28px 0}
     @media (max-width:1000px){.cards-grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:640px){.cards-grid{grid-template-columns:1fr}}
+    @media (max-width:640px){.cards-grid{grid-template-columns:1fr} }
 
     .card{
       background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;overflow:hidden;
@@ -287,7 +287,7 @@
             <div style="display:flex;justify-content:space-between;align-items:flex-start">
               <div>
                 <h3 class="card-title">Single Bottle</h3>
-                <p class="card-desc">250ml — Good for multiple pairs.</p>
+                <p class="card-desc">150ml — Good for multiple pairs.</p>
               </div>
               <div class="price-row" aria-hidden="true">
                 <div class="price-current">₹0</div>
@@ -311,13 +311,13 @@
           </div>
         </article>
 
-        <article class="card" role="listitem" data-product="Pack of 3" data-price-usd="13.33">
+        <article class="card" role="listitem" data-product="Pack of 3" data-price-usd="14.00">
           <div class="card-media"><img src="./static/images/combo offer.png" alt="Pack of 3"></div>
           <div class="card-body">
             <div style="display:flex;justify-content:space-between;align-items:flex-start">
               <div>
                 <h3 class="card-title">Pack of 3</h3>
-                <p class="card-desc">3 × 250ml • Gift pack.</p>
+                <p class="card-desc">3 × 150ml • Gift pack.</p>
               </div>
               <div class="price-row" aria-hidden="true">
                 <div class="price-current">₹0</div>
@@ -437,7 +437,7 @@
     /* constants (kept) */
     const SITE_PHONE = '7592857837';
     const USD_TO_INR = 88.28;
-    const DISCOUNT = 0.15;
+    // Note: DISCOUNT constant is not used; discount is derived from chosen base prices below.
 
     /* Utility */
     const el = sel => document.querySelector(sel);
@@ -537,12 +537,43 @@
       io.observe(container);
     })();
 
-    /* Pricing, quantity controls and WhatsApp order link */
+    /* Pricing, quantity controls and WhatsApp order link
+       — UPDATED: set base Single Bottle original=350 and selling=250
+       — All other card prices scale proportionally by data-price-usd relative to single-bottle USD (4.67)
+       — Discount derived from base original/sell (≈28.5714%)
+       — WhatsApp link logic remains compatible (api.whatsapp.com)
+    */
     (function purchaseInit(){
+      // base mapping: Single Bottle should show original 350 and selling 250
+      const BASE_USD = 4.67;        // the data-price-usd value for Single Bottle in markup
+      const BASE_ORIGINAL = 350;    // original price (₹) you asked
+      const BASE_SELL = 250;        // selling price (₹) you asked
+      // derived discount fraction
+      const BASE_DISCOUNT_FRAC = (BASE_ORIGINAL - BASE_SELL) / BASE_ORIGINAL; // ~0.285714...
+
+      // WhatsApp helpers (unchanged from earlier fix)
+      const DEFAULT_CC = '91';
+      function toE164Digits(phone){
+        if(!phone) return '';
+        let d = String(phone).replace(/\D/g, '');
+        if(d.length === 10){
+          d = DEFAULT_CC + d;
+        }
+        return d;
+      }
+      const waNumber = toE164Digits(SITE_PHONE);
+      const WA_BASE = 'https://api.whatsapp.com/send';
+
       elAll('.card').forEach(card => {
         const priceUsd = parseFloat(card.dataset.priceUsd || '0');
-        const orig = Math.round(priceUsd * USD_TO_INR);
-        const sell = Math.round(orig * (1 - DISCOUNT));
+
+        // scale original price proportional to USD ratio vs BASE_USD
+        // orig = round( (priceUsd / BASE_USD) * BASE_ORIGINAL )
+        const rawOrig = (priceUsd / BASE_USD) * BASE_ORIGINAL;
+        const orig = Math.round(rawOrig);
+
+        // apply same discount fraction to get selling price
+        const sell = Math.round(orig * (1 - BASE_DISCOUNT_FRAC));
         const save = orig - sell;
 
         const priceCurrent = card.querySelector('.price-current');
@@ -558,16 +589,31 @@
         const orderBtn = card.querySelector('.order-btn');
         let qty = 1;
 
+        function buildWhatsAppURL(qty){
+          const total = sell * qty;
+          const msg = `Hello, I want to order ${qty} × ${card.dataset.product} (Total ₹${fmtINR(total)}).`;
+          if(!waNumber){
+            return `https://wa.me/${encodeURIComponent(SITE_PHONE)}?text=${encodeURIComponent(msg)}`;
+          }
+          return `${WA_BASE}?phone=${encodeURIComponent(waNumber)}&text=${encodeURIComponent(msg)}`;
+        }
+
         function updateUI(){
           if(numEl) numEl.textContent = qty;
           if(orderBtn){
-            const total = sell * qty;
-            orderBtn.dataset.wa = `https://wa.me/${SITE_PHONE}?text=${encodeURIComponent(`Hello, I want to order ${qty} × ${card.dataset.product} (Total ₹${fmtINR(total)}).`)}`;
+            orderBtn.dataset.wa = buildWhatsAppURL(qty);
           }
         }
         dec?.addEventListener('click', () => { qty = Math.max(1, qty - 1); updateUI(); });
         inc?.addEventListener('click', () => { qty = Math.min(999, qty + 1); updateUI(); });
-        orderBtn?.addEventListener('click', () => { const wa = orderBtn.dataset.wa; if(wa) window.open(wa, '_blank', 'noopener'); });
+        orderBtn?.addEventListener('click', () => {
+          const wa = orderBtn.dataset.wa;
+          if(wa) {
+            window.open(wa, '_blank', 'noopener');
+          } else {
+            alert('WhatsApp link not available.');
+          }
+        });
         updateUI();
       });
     })();
