@@ -270,7 +270,7 @@
         </div>
         <div class="metric" role="group" aria-label="Return rate">
           <div class="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="40" stroke="#eee" stroke-width="7" fill="none"/><circle class="fg" cx="50" cy="50" r="40" stroke="var(--green)" stroke-width="7" fill="none" style="stroke-dasharray:0 999"></circle></svg></div>
-          <div><div class="value" data-target="2" data-format="percent">0%</div><div class="label">Return rate</div></div>
+          <div><div class="value' data-target="2" data-format="percent">0%</div><div class="label">Return rate</div></div>
         </div>
       </div>
     </section>
@@ -397,7 +397,7 @@
         <div class="contact-row">
           <div class="contact-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5c0 7 6 13 13 13" stroke="#cfe7d6" stroke-width="1.4" stroke-linecap="round"/></svg><div><div class="label">Phone</div><a id="footerPhone" href="tel:+917592857837">+91 75928 57837</a></div></div>
 
-          <div class="contact-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6.5h18v11H3z" stroke="#cfe7d6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div class="label">Email</div><a href="mailto:info@ezado.com">info@ezado.com</a></div></div>
+          <div class="contact-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6.5h18v11H3z" stroke="#cfe7d6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div class="label">Email</div><a href="mailto:ezadoshoecleaner@gmail.com">ezadoshoecleaner@gmail.com</a></div></div>
 
           <div class="contact-item" style="margin-top:6px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v6" stroke="#cfe7d6" stroke-width="1.2" stroke-linecap="round"/></svg><div><div class="label">Support</div><a href="#products">Order & Shipping</a></div></div>
         </div>
@@ -434,48 +434,37 @@
   </footer>
 
   <script>
-    /* constants (kept) */
+    // constants
     const SITE_PHONE = '7592857837';
     const USD_TO_INR = 88.28;
-    // Note: DISCOUNT constant is not used; discount is derived from chosen base prices below.
 
-    /* Utility */
-    const el = sel => document.querySelector(sel);
-    const elAll = sel => Array.from(document.querySelectorAll(sel));
+    // tiny helpers
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
     const fmtINR = n => n.toLocaleString('en-IN');
 
-    /* NAV: mobile toggle + phone/year injection */
-    (function navInit(){
-      const hamb = el('#hamburger');
-      const menu = el('#siteMenu');
+    // nav init
+    (function(){
+      const hamb = $('#hamburger'), menu = $('#siteMenu');
       hamb?.addEventListener('click', () => menu?.classList.toggle('show'));
       hamb?.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); menu?.classList.toggle('show'); }});
-      el('#topPhone').textContent = `+91 ${SITE_PHONE}`;
-      el('#footerPhone').href = `tel:+91${SITE_PHONE}`;
-      el('#year').textContent = new Date().getFullYear();
+      $('#topPhone').textContent = `+91 ${SITE_PHONE}`;
+      $('#footerPhone').href = `tel:+91${SITE_PHONE}`;
+      $('#year').textContent = new Date().getFullYear();
     })();
 
-    /* Simple responsive carousel (prev/next) */
-    (function carousel(){
-      const track = el('#carouselTrack');
-      const prev = el('#carouselPrev');
-      const next = el('#carouselNext');
-      if(!track) return;
+    // carousel
+    (function(){
+      const track = $('#carouselTrack'); if(!track) return;
+      const prev = $('#carouselPrev'), next = $('#carouselNext');
       let items = Array.from(track.children), index = 0;
       const computeSlides = () => (window.innerWidth <= 580 ? 1 : window.innerWidth <= 900 ? 2 : 3);
 
-      function layout(){
-        items = Array.from(track.children);
-        const slidesToShow = computeSlides();
-        items.forEach(it => it.style.width = `calc(100% / ${slidesToShow} - 14px)`);
-        moveTo(index, false);
-      }
+      function layout(){ items = Array.from(track.children); const slidesToShow = computeSlides(); items.forEach(it => it.style.width = `calc(100% / ${slidesToShow} - 14px)`); moveTo(index, false); }
       function moveTo(i, animate = true){
         const slidesToShow = computeSlides();
         const max = Math.max(0, items.length - slidesToShow);
-        if(i > max) i = 0;
-        if(i < 0) i = max;
-        index = i;
+        if(i > max) i = 0; if(i < 0) i = max; index = i;
         const slideWidth = (items[0]?.getBoundingClientRect().width || 0) + 14;
         track.style.transition = animate ? '' : 'none';
         track.style.transform = `translateX(${-index * slideWidth}px)`;
@@ -487,149 +476,142 @@
       layout();
     })();
 
-    /* Metrics animation */
-    (function metrics(){
-      const container = el('#trustMetrics');
-      if(!container) return;
+    // metrics animation
+    (function(){
+      const container = $('#trustMetrics'); if(!container) return;
       const ease = t => 1 - Math.pow(1 - t, 3);
       function animateCount(node, from, to, dur, format){
         const start = performance.now();
-        (function tick(now){
-          const t = Math.min(1, (now - start) / dur);
-          const v = Math.round(from + (to - from) * ease(t));
-          if(format === 'percent') node.textContent = v + '%';
-          else if(format === 'int') node.textContent = v.toLocaleString();
-          else node.textContent = v;
-          if(t < 1) requestAnimationFrame(tick);
-        })(start);
+        (function tick(now){ const t = Math.min(1, (now - start) / dur); const v = Math.round(from + (to - from) * ease(t)); node.textContent = format === 'percent' ? v + '%' : (format === 'int' ? v.toLocaleString() : v); if(t < 1) requestAnimationFrame(tick); })(start);
       }
       function animateRing(circle, percent, dur){
         if(!circle) return;
-        const r = circle.r.baseVal.value;
-        const c = 2 * Math.PI * r;
+        const r = circle.r.baseVal.value, c = 2 * Math.PI * r;
         circle.setAttribute('stroke-dasharray', `${c} ${c}`);
         const start = performance.now();
-        (function tick(now){
-          const t = Math.min(1, (now - start) / dur);
-          const eased = ease(t);
-          circle.style.strokeDashoffset = c * (1 - (percent * eased / 100));
-          if(t < 1) requestAnimationFrame(tick);
-        })(start);
+        (function tick(now){ const t = Math.min(1, (now - start) / dur); const eased = ease(t); circle.style.strokeDashoffset = c * (1 - (percent * eased / 100)); if(t < 1) requestAnimationFrame(tick); })(start);
       }
-
       function run(){
-        const metrics = Array.from(container.querySelectorAll('.metric'));
-        metrics.forEach((m, i) => {
-          const v = m.querySelector('.value');
-          const target = Number(v.dataset.target) || 0;
-          const fmt = v.dataset.format || 'int';
+        $$('.metric').forEach((m,i) => {
+          const v = m.querySelector('.value'); const target = Number(v.dataset.target) || 0; const fmt = v.dataset.format || 'int';
           const percent = fmt === 'percent' ? Math.max(0, Math.min(100, target)) : Math.min(100, (target / 1200000) * 100);
-          setTimeout(() => {
-            animateRing(m.querySelector('circle.fg'), percent, 900);
-            animateCount(v, 0, target, fmt === 'percent' ? 900 : 1100, fmt);
-          }, i * 120);
+          setTimeout(() => { animateRing(m.querySelector('circle.fg'), percent, 900); animateCount(v, 0, target, fmt === 'percent' ? 900 : 1100, fmt); }, i * 120);
         });
       }
-
-      const io = new IntersectionObserver((entries, obs) => {
-        entries.forEach(en => { if (en.isIntersecting) { run(); obs.disconnect(); }});
-      }, { threshold: .45 });
-      io.observe(container);
+      new IntersectionObserver((entries, obs) => { entries.forEach(en => { if (en.isIntersecting) { run(); obs.disconnect(); } }); }, { threshold: .45 }).observe(container);
     })();
 
-    /* Pricing, quantity controls and WhatsApp order link
-       — UPDATED: set base Single Bottle original=350 and selling=250
-       — All other card prices scale proportionally by data-price-usd relative to single-bottle USD (4.67)
-       — Discount derived from base original/sell (≈28.5714%)
-       — WhatsApp link logic remains compatible (api.whatsapp.com)
-    */
-    (function purchaseInit(){
-      // base mapping: Single Bottle should show original 350 and selling 250
-      const BASE_USD = 4.67;        // the data-price-usd value for Single Bottle in markup
-      const BASE_ORIGINAL = 350;    // original price (₹) you asked
-      const BASE_SELL = 250;        // selling price (₹) you asked
-      // derived discount fraction
-      const BASE_DISCOUNT_FRAC = (BASE_ORIGINAL - BASE_SELL) / BASE_ORIGINAL; // ~0.285714...
-
-      // WhatsApp helpers (unchanged from earlier fix)
-      const DEFAULT_CC = '91';
-      function toE164Digits(phone){
-        if(!phone) return '';
-        let d = String(phone).replace(/\D/g, '');
-        if(d.length === 10){
-          d = DEFAULT_CC + d;
-        }
-        return d;
+    // nice rounding helper:
+    // - keep single bottle fixed (orig 350, sell 250)
+    // - for others: under 100 -> nearest 10 then set last digit to 9 (e.g. 241 -> 249)
+    //               100 or more -> nearest 100 then set last two digits to 99 (e.g. 714 -> 699)
+    function nicePrice(n){
+      if(n < 100){
+        const tens = Math.round(n / 10) * 10;
+        return Math.max(9, tens - 1); // ensure at least 9
+      } else {
+        const hundreds = Math.round(n / 100) * 100;
+        return Math.max(99, hundreds - 1);
       }
-      const waNumber = toE164Digits(SITE_PHONE);
+    }
+
+    // pricing & purchase (WhatsApp links, qty, rounding)
+    (function(){
+      const BASE_USD = 4.67;            // Single Bottle data-price-usd
+      const BASE_ORIGINAL = 350;        // requested original ₹ (kept exact)
+      const BASE_SELL = 250;            // requested selling ₹ (kept exact)
+      const BASE_DISCOUNT_FRAC = (BASE_ORIGINAL - BASE_SELL) / BASE_ORIGINAL;
+      const DEFAULT_CC = '91';
       const WA_BASE = 'https://api.whatsapp.com/send';
 
-      elAll('.card').forEach(card => {
+      function digitsE164(phone){
+        if(!phone) return '';
+        let d = String(phone).replace(/\D/g,'');
+        if(d.length === 10) d = DEFAULT_CC + d;
+        return d;
+      }
+      const waNumber = digitsE164(SITE_PHONE);
+
+      $$('.card').forEach(card => {
         const priceUsd = parseFloat(card.dataset.priceUsd || '0');
 
-        // scale original price proportional to USD ratio vs BASE_USD
-        // orig = round( (priceUsd / BASE_USD) * BASE_ORIGINAL )
-        const rawOrig = (priceUsd / BASE_USD) * BASE_ORIGINAL;
-        const orig = Math.round(rawOrig);
+        // If it's the Single Bottle product, enforce the exact prices requested.
+        let orig, sell;
+        if(card.dataset.product === 'Single Bottle'){
+          orig = BASE_ORIGINAL;
+          sell = BASE_SELL;
+        } else {
+          // compute proportional original based on USD ratio
+          const rawOrig = (priceUsd / BASE_USD) * BASE_ORIGINAL;
+          orig = Math.round(rawOrig);
 
-        // apply same discount fraction to get selling price
-        const sell = Math.round(orig * (1 - BASE_DISCOUNT_FRAC));
-        const save = orig - sell;
+          // apply same base discount fraction to get tentative sell
+          let tentativeSell = Math.round(orig * (1 - BASE_DISCOUNT_FRAC));
 
+          // round both to nice retail endings
+          orig = nicePrice(orig);
+          tentativeSell = nicePrice(tentativeSell);
+
+          // ensure sell is strictly less than orig; if rounding made them equal or sell >= orig, reduce sell by smallest step
+          if(tentativeSell >= orig){
+            // for <100, step is 10 -> end with 9, so reduce by 10; for >=100, reduce by 100 and set -1 to keep pattern
+            tentativeSell = (orig < 100) ? Math.max(9, orig - 10) : Math.max(99, orig - 100);
+            // if still >= orig, finally set tentativeSell = orig - 1
+            if(tentativeSell >= orig) tentativeSell = orig - 1;
+          }
+          sell = tentativeSell;
+        }
+
+        const save = Math.max(0, orig - sell);
+
+        // DOM updates
         const priceCurrent = card.querySelector('.price-current');
         const priceOriginal = card.querySelector('.price-original');
         const saveEls = card.querySelectorAll('.save-amount');
         if(priceCurrent) priceCurrent.textContent = '₹' + fmtINR(sell);
         if(priceOriginal) priceOriginal.textContent = '₹' + fmtINR(orig);
-        saveEls.forEach(elm => elm.textContent = '₹' + fmtINR(save));
+        saveEls.forEach(el => el.textContent = '₹' + fmtINR(save));
 
+        // quantity controls + whatsapp
+        let qty = 1;
         const numEl = card.querySelector('.num');
         const dec = card.querySelector('.dec');
         const inc = card.querySelector('.inc');
         const orderBtn = card.querySelector('.order-btn');
-        let qty = 1;
 
-        function buildWhatsAppURL(qty){
-          const total = sell * qty;
-          const msg = `Hello, I want to order ${qty} × ${card.dataset.product} (Total ₹${fmtINR(total)}).`;
-          if(!waNumber){
-            return `https://wa.me/${encodeURIComponent(SITE_PHONE)}?text=${encodeURIComponent(msg)}`;
-          }
-          return `${WA_BASE}?phone=${encodeURIComponent(waNumber)}&text=${encodeURIComponent(msg)}`;
+        function buildWA(q){
+          const total = sell * q;
+          const msg = `Hello, I want to order ${q} × ${card.dataset.product} (Total ₹${fmtINR(total)}).`;
+          return waNumber ? `${WA_BASE}?phone=${encodeURIComponent(waNumber)}&text=${encodeURIComponent(msg)}` : `https://wa.me/${encodeURIComponent(SITE_PHONE)}?text=${encodeURIComponent(msg)}`;
         }
 
-        function updateUI(){
+        function update(){
           if(numEl) numEl.textContent = qty;
-          if(orderBtn){
-            orderBtn.dataset.wa = buildWhatsAppURL(qty);
-          }
+          if(orderBtn) orderBtn.dataset.wa = buildWA(qty);
         }
-        dec?.addEventListener('click', () => { qty = Math.max(1, qty - 1); updateUI(); });
-        inc?.addEventListener('click', () => { qty = Math.min(999, qty + 1); updateUI(); });
+
+        dec?.addEventListener('click', () => { qty = Math.max(1, qty - 1); update(); });
+        inc?.addEventListener('click', () => { qty = Math.min(999, qty + 1); update(); });
         orderBtn?.addEventListener('click', () => {
           const wa = orderBtn.dataset.wa;
-          if(wa) {
-            window.open(wa, '_blank', 'noopener');
-          } else {
-            alert('WhatsApp link not available.');
-          }
+          if(wa) window.open(wa, '_blank', 'noopener');
+          else alert('WhatsApp link not available.');
         });
-        updateUI();
+
+        update();
       });
     })();
 
-    /* Footer interactions */
+    // newsletter & social helpers
     function subscribe(){
-      const input = el('#emailInput');
+      const input = $('#emailInput');
       const email = input?.value?.trim();
       if(!email){ input?.focus(); return alert('Please enter your email.'); }
       input.value = '';
       alert('Thanks — you are subscribed!');
     }
-    function openSocial(url){ window.open(url,'_blank','noopener'); }
-    elAll('.social-btn').forEach(btn => {
-      btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }});
-    });
+    function openSocial(url){ window.open(url, '_blank', 'noopener'); }
+    $$('.social-btn').forEach(btn => btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }}));
   </script>
 </body>
 </html>
