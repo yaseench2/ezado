@@ -60,7 +60,7 @@
     .qty{display:inline-flex;align-items:center;background:#f4f7f5;border-radius:8px;padding:6px 8px;border:1px solid #eef4ee}.qty button{border:0;background:transparent;padding:6px 8px;cursor:pointer;font-weight:800}.order-btn{flex:1;background:linear-gradient(90deg,var(--green),var(--green-dark));color:#fff;border:0;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:800}
     footer.site-footer{background:var(--footer-bg);color:var(--fg);padding:40px 18px;margin-top:32px;border-top:1px solid rgba(255,255,255,0.03)}
     .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:24px;align-items:start}.footer-brand .logo{font-weight:900;font-size:1.15rem;color:#fff}.footer-brand p{color:var(--muted);margin:8px 0 0;line-height:1.5}.footer-col h4{margin:0 0 10px 0;font-size:1rem;color:#fff}
-    .footer-links{display:flex;flex-direction:column;gap:8px}.footer-links a{color:rgba(230,238,240,0.92);padding:6px;border-radius:6px}.footer-links a:hover{background:rgba(255,255,255,0.03)}
+    .footer-links{display:flex;flex-direction:column;gap:8px}.footer-links a{color:rgba(230,238,240,0.92);padding:6px;border-radius:6px}.footer-links a:hover{background:rgba(255,255,255,.03)}
     .contact-row{display:flex;flex-direction:column;gap:8px}.contact-item{display:flex;gap:10px;align-items:center}.contact-item .label{font-weight:700;color:#fff}
     .newsletter{display:flex;flex-direction:column;gap:10px}.newsletter-form{display:flex;gap:8px;align-items:center}.newsletter-form input[type="email"]{flex:1;padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.03);color:var(--fg)}.newsletter-form button{background:linear-gradient(90deg,var(--green),var(--green-dark));color:#fff;border:0;padding:10px 14px;border-radius:8px;font-weight:700;cursor:pointer}
     .social-row{display:flex;gap:10px;align-items:center}.social-btn{width:44px;height:44px;border-radius:10px;border:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.25);transition:transform .14s ease}
@@ -284,7 +284,9 @@
         <h4>Contact & Support</h4>
         <div class="contact-row">
           <div class="contact-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 5c0 7 6 13 13 13" stroke="#cfe7d6" stroke-width="1.4" stroke-linecap="round"/></svg><div><div class="label">Phone</div><a id="footerPhone" href="tel:+917592857837">+91 75928 57837</a></div></div>
+
           <div class="contact-item"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 6.5h18v11H3z" stroke="#cfe7d6" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><div><div class="label">Email</div><a href="mailto:ezadoshoecleaner@gmail.com">ezadoshoecleaner@gmail.com</a></div></div>
+
           <div class="contact-item" style="margin-top:6px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v6" stroke="#cfe7d6" stroke-width="1.2" stroke-linecap="round"/></svg><div><div class="label">Support</div><a href="#products">Order & Shipping</a></div></div>
         </div>
       </div>
@@ -304,8 +306,11 @@
             <div style="font-weight:700;color:#fff">Follow</div>
             <div class="social-row" role="navigation" aria-label="Social links">
               <button class="social-btn social-facebook" aria-label="Facebook" title="Facebook" onclick="openSocial('https://facebook.com')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 3h3v4h-3v2h3v8h-4v-8h-2v-2h2V6.5C14 5 15 3 15 3z" fill="#fff"/></svg></button>
+
               <button class="social-btn social-instagram" aria-label="Instagram" title="Instagram" onclick="openSocial('https://www.instagram.com/ezado2?igsh=MXU4dWJjbWw5aG84aw==')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4" fill="none" stroke="#ffffff" stroke-width="1.2"></rect><circle cx="12" cy="12" r="3" stroke="#fff" stroke-width="1.2"/><circle cx="17.5" cy="6.5" r="1" fill="#fff"/></svg></button>
+
               <button class="social-btn social-twitter" aria-label="Twitter" title="Twitter" onclick="openSocial('https://twitter.com')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 7.5c-.6.3-1.2.5-1.9.6.7-.4 1.2-1 1.5-1.7-.6.4-1.3.7-2 .9C16.6 6.6 15.6 6 14.4 6c-1.8 0-3.2 1.5-3.2 3.3 0 .3 0 .6.1.9C7.8 9.9 5 8.1 3 5.6c-.3.6-.5 1.4-.5 2.1 0 1.4.7 2.6 1.7 3.3-.5 0-1-.2-1.5-.4v.1c0 1.9 1.4 3.5 3.3 3.9-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3 2.3C10.1 19 8.8 19.7 7.4 19.7c-.6 0-1.1 0-1.6-.1C6 21 8 22 10.2 22c6.1 0 9.4-5.1 9.4-9.5v-.4C19.8 8.7 20 8.1 20 7.5z" fill="#fff"/></svg></button>
+
               <button class="social-btn social-youtube" aria-label="YouTube" title="YouTube" onclick="openSocial('https://youtube.com')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M23 7.5s-.2-1.7-.8-2.4c-.7-.9-1.5-.9-1.9-1C17.6 3.8 12 3.8 12 3.8s-5.7 0-8.3.3c-.4 0-1.3 0-1.9 1C1.2 5.8 1 7.5 1 7.5S1 9.6 1 11.8v.4c0 2.2.1 4.3.1 4.3s.2 1.7.8 2.4c.7.9 1.6.9 2 1 1.4.2 6.1.3 6.1.3s5.7 0 8.3-.3c.4 0 1.3 0 1.9-1 .6-.7.8-2.4.8-2.4s.1-2.2.1-4.4v-.4c0-2.2-.1-4.3-.1-4.3z" fill="#fff"/><path d="M10 15.5l5-3.3-5-3.2z" fill="#fff"/></svg></button>
             </div>
           </div>
@@ -317,49 +322,121 @@
   </footer>
 
   <script>
-    const SITE_PHONE='7592857837',USD_TO_INR=88.28,WA_BASE='https://api.whatsapp.com/send';
-    const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s)),fmtINR=n=>n.toLocaleString('en-IN');
-    (function(){const hamb=$('#hamburger'),menu=$('#siteMenu');hamb?.addEventListener('click',()=>menu?.classList.toggle('show'));hamb?.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();menu?.classList.toggle('show')}});$('#topPhone').textContent=`+91 ${SITE_PHONE}`;$('#footerPhone').href=`tel:+91${SITE_PHONE}`;$('#year').textContent=new Date().getFullYear()})();
-    (function(){const track=$('#carouselTrack');if(!track)return;const prev=$('#carouselPrev'),next=$('#carouselNext');let items=Array.from(track.children),index=0,computeSlides=()=>window.innerWidth<=580?1:window.innerWidth<=900?2:3;function layout(){items=Array.from(track.children);const slidesToShow=computeSlides();items.forEach(it=>it.style.width=`calc(100% / ${slidesToShow} - 14px)`);moveTo(index,false)}function moveTo(i,animate=true){const slidesToShow=computeSlides();const max=Math.max(0,items.length-slidesToShow);if(i>max)i=0;if(i<0)i=max;index=i;const slideWidth=(items[0]?.getBoundingClientRect().width||0)+14;track.style.transition=animate?'':'none';track.style.transform=`translateX(${-index*slideWidth}px)`;if(!animate)void track.offsetWidth}prev?.addEventListener('click',()=>moveTo(index-1));next?.addEventListener('click',()=>moveTo(index+1));window.addEventListener('resize',layout);layout()})();
-    (function(){const container=$('#trustMetrics');if(!container)return;const ease=t=>1-Math.pow(1-t,3);function animateCount(node,from,to,dur,format){const start=performance.now();(function tick(now){const t=Math.min(1,(now-start)/dur);const v=Math.round(from+(to-from)*ease(t));node.textContent=format==='percent'?v+'%':(format==='int'?v.toLocaleString():v);if(t<1)requestAnimationFrame(tick)})(start)}function animateRing(circle,percent,dur){if(!circle)return;const r=circle.r.baseVal.value,c=2*Math.PI*r;circle.setAttribute('stroke-dasharray',`${c} ${c}`);const start=performance.now();(function tick(now){const t=Math.min(1,(now-start)/dur);const eased=ease(t);circle.style.strokeDashoffset=c*(1-(percent*eased/100));if(t<1)requestAnimationFrame(tick)})(start)}function run(){$$('.metric').forEach((m,i)=>{const v=m.querySelector('.value');const target=Number(v.dataset.target)||0;const fmt=v.dataset.format||'int';const percent=fmt==='percent'?Math.max(0,Math.min(100,target)):Math.min(100,(target/1200000)*100);setTimeout(()=>{animateRing(m.querySelector('circle.fg'),percent,900);animateCount(v,0,target,fmt==='percent'?900:1100,fmt)},i*120)})}new IntersectionObserver((entries,obs)=>{entries.forEach(en=>{if(en.isIntersecting){run();obs.disconnect()}})},{threshold:.45}).observe(container)})();
-    function nicePrice(n){if(n<100){const tens=Math.round(n/10)*10;return Math.max(9,tens-1)}const hundreds=Math.round(n/100)*100;return Math.max(99,hundreds-1)}
+    const SITE_PHONE = '7592857837';
+    const USD_TO_INR = 88.28;
+    const WA_BASE = 'https://api.whatsapp.com/send';
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
+    const fmtINR = n => n.toLocaleString('en-IN');
+
     (function(){
-      const BASE_USD=4.67,BASE_ORIGINAL=350,BASE_SELL=250,BASE_DISCOUNT_FRAC=(BASE_ORIGINAL-BASE_SELL)/BASE_ORIGINAL,DEFAULT_CC='91';
-      function digitsE164(phone){if(!phone)return'';let d=String(phone).replace(/\D/g,'');if(d.length===10)d=DEFAULT_CC+d;return d}
-      const waNumber=digitsE164(SITE_PHONE);
-      $$('.card').forEach(card=>{
-        const priceUsd=parseFloat(card.dataset.priceUsd||'0');
-        let origRaw,sellRaw,origRounded,sellRounded;
-        if(card.dataset.product==='Single Bottle'){
-          origRaw=BASE_ORIGINAL;sellRaw=BASE_SELL;origRounded=350;sellRounded=249;
+      const hamb = $('#hamburger'), menu = $('#siteMenu');
+      hamb?.addEventListener('click', () => menu?.classList.toggle('show'));
+      hamb?.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); menu?.classList.toggle('show'); }});
+      $('#topPhone').textContent = `+91 ${SITE_PHONE}`;
+      $('#footerPhone').href = `tel:+91${SITE_PHONE}`;
+      $('#year').textContent = new Date().getFullYear();
+    })();
+
+    (function(){
+      const track = $('#carouselTrack'); if(!track) return;
+      const prev = $('#carouselPrev'), next = $('#carouselNext');
+      let items = Array.from(track.children), index = 0;
+      const computeSlides = () => (window.innerWidth <= 580 ? 1 : window.innerWidth <= 900 ? 2 : 3);
+      function layout(){ items = Array.from(track.children); const slidesToShow = computeSlides(); items.forEach(it => it.style.width = `calc(100% / ${slidesToShow} - 14px)`); moveTo(index, false); }
+      function moveTo(i, animate = true){ const slidesToShow = computeSlides(); const max = Math.max(0, items.length - slidesToShow); if(i > max) i = 0; if(i < 0) i = max; index = i; const slideWidth = (items[0]?.getBoundingClientRect().width || 0) + 14; track.style.transition = animate ? '' : 'none'; track.style.transform = `translateX(${-index * slideWidth}px)`; if(!animate) void track.offsetWidth; }
+      prev?.addEventListener('click', () => moveTo(index - 1));
+      next?.addEventListener('click', () => moveTo(index + 1));
+      window.addEventListener('resize', layout);
+      layout();
+    })();
+
+    (function(){
+      const container = $('#trustMetrics'); if(!container) return;
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      function animateCount(node, from, to, dur, format){ const start = performance.now(); (function tick(now){ const t = Math.min(1, (now - start) / dur); const v = Math.round(from + (to - from) * ease(t)); node.textContent = format === 'percent' ? v + '%' : (format === 'int' ? v.toLocaleString() : v); if(t < 1) requestAnimationFrame(tick); })(start); }
+      function animateRing(circle, percent, dur){ if(!circle) return; const r = circle.r.baseVal.value, c = 2 * Math.PI * r; circle.setAttribute('stroke-dasharray', `${c} ${c}`); const start = performance.now(); (function tick(now){ const t = Math.min(1, (now - start) / dur); const eased = ease(t); circle.style.strokeDashoffset = c * (1 - (percent * eased / 100)); if(t < 1) requestAnimationFrame(tick); })(start); }
+      function run(){ $$('.metric').forEach((m,i) => { const v = m.querySelector('.value'); const target = Number(v.dataset.target) || 0; const fmt = v.dataset.format || 'int'; const percent = fmt === 'percent' ? Math.max(0, Math.min(100, target)) : Math.min(100, (target / 1200000) * 100); setTimeout(() => { animateRing(m.querySelector('circle.fg'), percent, 900); animateCount(v, 0, target, fmt === 'percent' ? 900 : 1100, fmt); }, i * 120); }); }
+      new IntersectionObserver((entries, obs) => { entries.forEach(en => { if (en.isIntersecting) { run(); obs.disconnect(); } }); }, { threshold: .45 }).observe(container);
+    })();
+
+    function nicePrice(n){
+      if(n < 100){
+        const tens = Math.round(n / 10) * 10;
+        return Math.max(9, tens - 1);
+      } else {
+        const hundreds = Math.round(n / 100) * 100;
+        return Math.max(99, hundreds - 1);
+      }
+    }
+
+    (function(){
+      const BASE_USD = 4.67;
+      const BASE_ORIGINAL = 350;
+      const BASE_SELL = 250;
+      const BASE_DISCOUNT_FRAC = (BASE_ORIGINAL - BASE_SELL) / BASE_ORIGINAL;
+      const DEFAULT_CC = '91';
+      function digitsE164(phone){ if(!phone) return ''; let d = String(phone).replace(/\D/g,''); if(d.length === 10) d = DEFAULT_CC + d; return d; }
+      const waNumber = digitsE164(SITE_PHONE);
+
+      $$('.card').forEach(card => {
+        const priceUsd = parseFloat(card.dataset.priceUsd || '0');
+        let origRaw, sellRaw, origRounded, sellRounded;
+
+        if(card.dataset.product === 'Single Bottle'){
+          origRaw = BASE_ORIGINAL;
+          sellRaw = BASE_SELL;
+          origRounded = 350;
+          sellRounded = 249;
         } else {
-          const rawOrig=Math.round((priceUsd/BASE_USD)*BASE_ORIGINAL);
-          origRaw=rawOrig; sellRaw=Math.round(rawOrig*(1-BASE_DISCOUNT_FRAC));
-          origRounded=nicePrice(origRaw); sellRounded=nicePrice(sellRaw);
-          if(sellRounded>=origRounded){sellRounded=(origRounded<100)?Math.max(9,origRounded-10):Math.max(99,origRounded-100); if(sellRounded>=origRounded)sellRounded=origRounded-1}
+          const rawOrig = Math.round((priceUsd / BASE_USD) * BASE_ORIGINAL);
+          origRaw = rawOrig;
+          sellRaw = Math.round(rawOrig * (1 - BASE_DISCOUNT_FRAC));
+          origRounded = nicePrice(origRaw);
+          sellRounded = nicePrice(sellRaw);
+          if(sellRounded >= origRounded){
+            sellRounded = (origRounded < 100) ? Math.max(9, origRounded - 10) : Math.max(99, origRounded - 100);
+            if(sellRounded >= origRounded) sellRounded = origRounded - 1;
+          }
         }
-        const saveShown=Math.max(0,origRounded-sellRounded);
-        const priceCurrent=card.querySelector('.price-current'),priceOriginal=card.querySelector('.price-original'),saveEls=card.querySelectorAll('.save-amount');
-        if(priceCurrent)priceCurrent.textContent='₹'+fmtINR(sellRounded);
-        if(priceOriginal)priceOriginal.textContent='₹'+fmtINR(origRounded);
-        saveEls.forEach(el=>el.textContent='₹'+fmtINR(saveShown));
-        let qty=1;
-        const numEl=card.querySelector('.num'),dec=card.querySelector('.dec'),inc=card.querySelector('.inc'),orderBtn=card.querySelector('.order-btn');
+
+        const saveShown = Math.max(0, origRounded - sellRounded);
+        const priceCurrent = card.querySelector('.price-current');
+        const priceOriginal = card.querySelector('.price-original');
+        const saveEls = card.querySelectorAll('.save-amount');
+        if(priceCurrent) priceCurrent.textContent = '₹' + fmtINR(sellRounded);
+        if(priceOriginal) priceOriginal.textContent = '₹' + fmtINR(origRounded);
+        saveEls.forEach(el => el.textContent = '₹' + fmtINR(saveShown));
+
+        let qty = 1;
+        const numEl = card.querySelector('.num');
+        const dec = card.querySelector('.dec');
+        const inc = card.querySelector('.inc');
+        const orderBtn = card.querySelector('.order-btn');
+
         function buildWA(q){
-          const effectiveQty=(Number(q)||0)+1;
-          const total=sellRaw*effectiveQty;
-          const msg=`Hello, I want to order ${q} × ${card.dataset.product} (Displayed price per unit: ₹${fmtINR(sellRounded)}). Please note total calculated at real price for ${effectiveQty} units: ₹${fmtINR(total)}.`;
-          return waNumber?`${WA_BASE}?phone=${encodeURIComponent(waNumber)}&text=${encodeURIComponent(msg)}`:`https://wa.me/${encodeURIComponent(SITE_PHONE)}?text=${encodeURIComponent(msg)}`;
+          const effectiveQty = (Number(q) || 0) + 1;
+          const total = sellRaw * effectiveQty;
+          const msg = `Hello, I want to order ${q} × ${card.dataset.product} (Total ₹${fmtINR(total)}).`;
+          return waNumber ? `${WA_BASE}?phone=${encodeURIComponent(waNumber)}&text=${encodeURIComponent(msg)}` : `https://wa.me/${encodeURIComponent(SITE_PHONE)}?text=${encodeURIComponent(msg)}`;
         }
-        function update(){if(numEl)numEl.textContent=qty; if(orderBtn)orderBtn.dataset.wa=buildWA(qty)}
-        dec?.addEventListener('click',()=>{qty=Math.max(1,qty-1);update()}); inc?.addEventListener('click',()=>{qty=Math.min(999,qty+1);update()});
-        orderBtn?.addEventListener('click',()=>{const wa=orderBtn.dataset.wa; if(wa)window.open(wa,'_blank','noopener'); else alert('WhatsApp link not available.')});
+
+        function update(){
+          if(numEl) numEl.textContent = qty;
+          if(orderBtn) orderBtn.dataset.wa = buildWA(qty);
+        }
+
+        dec?.addEventListener('click', () => { qty = Math.max(1, qty - 1); update(); });
+        inc?.addEventListener('click', () => { qty = Math.min(999, qty + 1); update(); });
+        orderBtn?.addEventListener('click', () => { const wa = orderBtn.dataset.wa; if(wa) window.open(wa, '_blank', 'noopener'); else alert('WhatsApp link not available.'); });
+
         update();
       });
     })();
-    function subscribe(){const input=$('#emailInput');const email=input?.value?.trim();if(!email){input?.focus();return alert('Please enter your email.');}input.value='';alert('Thanks — you are subscribed!')}
-    function openSocial(url){window.open(url,'_blank','noopener')}
-    $$('.social-btn').forEach(btn=>btn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();btn.click()}}));
+
+    function subscribe(){ const input = $('#emailInput'); const email = input?.value?.trim(); if(!email){ input?.focus(); return alert('Please enter your email.'); } input.value = ''; alert('Thanks — you are subscribed!'); }
+    function openSocial(url){ window.open(url, '_blank', 'noopener'); }
+    $$('.social-btn').forEach(btn => btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); } }));
   </script>
 </body>
 </html>
