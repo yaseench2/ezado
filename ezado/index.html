@@ -322,121 +322,42 @@
   </footer>
 
   <script>
-    const SITE_PHONE = '7592857837';
-    const USD_TO_INR = 88.28;
-    const WA_BASE = 'https://api.whatsapp.com/send';
-    const $ = s => document.querySelector(s);
-    const $$ = s => Array.from(document.querySelectorAll(s));
-    const fmtINR = n => n.toLocaleString('en-IN');
-
+    const SITE_PHONE='7592857837',USD_TO_INR=88.28,WA_BASE='https://api.whatsapp.com/send';
+    const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s)),fmtINR=n=>n.toLocaleString('en-IN');
+    (function(){const hamb=$('#hamburger'),menu=$('#siteMenu');hamb?.addEventListener('click',()=>menu?.classList.toggle('show'));hamb?.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();menu?.classList.toggle('show')}});$('#topPhone').textContent=`+91 ${SITE_PHONE}`;$('#footerPhone').href=`tel:+91${SITE_PHONE}`;$('#year').textContent=new Date().getFullYear()})();
+    (function(){const track=$('#carouselTrack');if(!track)return;const prev=$('#carouselPrev'),next=$('#carouselNext');let items=Array.from(track.children),index=0,computeSlides=()=>window.innerWidth<=580?1:window.innerWidth<=900?2:3;function layout(){items=Array.from(track.children);const slidesToShow=computeSlides();items.forEach(it=>it.style.width=`calc(100% / ${slidesToShow} - 14px)`);moveTo(index,false)}function moveTo(i,animate=true){const slidesToShow=computeSlides();const max=Math.max(0,items.length-slidesToShow);if(i>max)i=0;if(i<0)i=max;index=i;const slideWidth=(items[0]?.getBoundingClientRect().width||0)+14;track.style.transition=animate?'':'none';track.style.transform=`translateX(${-index*slideWidth}px)`;if(!animate)void track.offsetWidth}prev?.addEventListener('click',()=>moveTo(index-1));next?.addEventListener('click',()=>moveTo(index+1));window.addEventListener('resize',layout);layout()})();
+    (function(){const container=$('#trustMetrics');if(!container)return;const ease=t=>1-Math.pow(1-t,3);function animateCount(node,from,to,dur,format){const start=performance.now();(function tick(now){const t=Math.min(1,(now-start)/dur);const v=Math.round(from+(to-from)*ease(t));node.textContent=format==='percent'?v+'%':(format==='int'?v.toLocaleString():v);if(t<1)requestAnimationFrame(tick)})(start)}function animateRing(circle,percent,dur){if(!circle)return;const r=circle.r.baseVal.value,c=2*Math.PI*r;circle.setAttribute('stroke-dasharray',`${c} ${c}`);const start=performance.now();(function tick(now){const t=Math.min(1,(now-start)/dur);const eased=ease(t);circle.style.strokeDashoffset=c*(1-(percent*eased/100));if(t<1)requestAnimationFrame(tick)})(start)}function run(){$$('.metric').forEach((m,i)=>{const v=m.querySelector('.value');const target=Number(v.dataset.target)||0;const fmt=v.dataset.format||'int';const percent=fmt==='percent'?Math.max(0,Math.min(100,target)):Math.min(100,(target/1200000)*100);setTimeout(()=>{animateRing(m.querySelector('circle.fg'),percent,900);animateCount(v,0,target,fmt==='percent'?900:1100,fmt)},i*120)})}new IntersectionObserver((entries,obs)=>{entries.forEach(en=>{if(en.isIntersecting){run();obs.disconnect()}})},{threshold:.45}).observe(container)})();
+    function nicePrice(n){if(n<100){const tens=Math.round(n/10)*10;return Math.max(9,tens-1)}const hundreds=Math.round(n/100)*100;return Math.max(99,hundreds-1)}
     (function(){
-      const hamb = $('#hamburger'), menu = $('#siteMenu');
-      hamb?.addEventListener('click', () => menu?.classList.toggle('show'));
-      hamb?.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); menu?.classList.toggle('show'); }});
-      $('#topPhone').textContent = `+91 ${SITE_PHONE}`;
-      $('#footerPhone').href = `tel:+91${SITE_PHONE}`;
-      $('#year').textContent = new Date().getFullYear();
-    })();
-
-    (function(){
-      const track = $('#carouselTrack'); if(!track) return;
-      const prev = $('#carouselPrev'), next = $('#carouselNext');
-      let items = Array.from(track.children), index = 0;
-      const computeSlides = () => (window.innerWidth <= 580 ? 1 : window.innerWidth <= 900 ? 2 : 3);
-      function layout(){ items = Array.from(track.children); const slidesToShow = computeSlides(); items.forEach(it => it.style.width = `calc(100% / ${slidesToShow} - 14px)`); moveTo(index, false); }
-      function moveTo(i, animate = true){ const slidesToShow = computeSlides(); const max = Math.max(0, items.length - slidesToShow); if(i > max) i = 0; if(i < 0) i = max; index = i; const slideWidth = (items[0]?.getBoundingClientRect().width || 0) + 14; track.style.transition = animate ? '' : 'none'; track.style.transform = `translateX(${-index * slideWidth}px)`; if(!animate) void track.offsetWidth; }
-      prev?.addEventListener('click', () => moveTo(index - 1));
-      next?.addEventListener('click', () => moveTo(index + 1));
-      window.addEventListener('resize', layout);
-      layout();
-    })();
-
-    (function(){
-      const container = $('#trustMetrics'); if(!container) return;
-      const ease = t => 1 - Math.pow(1 - t, 3);
-      function animateCount(node, from, to, dur, format){ const start = performance.now(); (function tick(now){ const t = Math.min(1, (now - start) / dur); const v = Math.round(from + (to - from) * ease(t)); node.textContent = format === 'percent' ? v + '%' : (format === 'int' ? v.toLocaleString() : v); if(t < 1) requestAnimationFrame(tick); })(start); }
-      function animateRing(circle, percent, dur){ if(!circle) return; const r = circle.r.baseVal.value, c = 2 * Math.PI * r; circle.setAttribute('stroke-dasharray', `${c} ${c}`); const start = performance.now(); (function tick(now){ const t = Math.min(1, (now - start) / dur); const eased = ease(t); circle.style.strokeDashoffset = c * (1 - (percent * eased / 100)); if(t < 1) requestAnimationFrame(tick); })(start); }
-      function run(){ $$('.metric').forEach((m,i) => { const v = m.querySelector('.value'); const target = Number(v.dataset.target) || 0; const fmt = v.dataset.format || 'int'; const percent = fmt === 'percent' ? Math.max(0, Math.min(100, target)) : Math.min(100, (target / 1200000) * 100); setTimeout(() => { animateRing(m.querySelector('circle.fg'), percent, 900); animateCount(v, 0, target, fmt === 'percent' ? 900 : 1100, fmt); }, i * 120); }); }
-      new IntersectionObserver((entries, obs) => { entries.forEach(en => { if (en.isIntersecting) { run(); obs.disconnect(); } }); }, { threshold: .45 }).observe(container);
-    })();
-
-    function nicePrice(n){
-      if(n < 100){
-        const tens = Math.round(n / 10) * 10;
-        return Math.max(9, tens - 1);
-      } else {
-        const hundreds = Math.round(n / 100) * 100;
-        return Math.max(99, hundreds - 1);
-      }
-    }
-
-    (function(){
-      const BASE_USD = 4.67;
-      const BASE_ORIGINAL = 350;
-      const BASE_SELL = 250;
-      const BASE_DISCOUNT_FRAC = (BASE_ORIGINAL - BASE_SELL) / BASE_ORIGINAL;
-      const DEFAULT_CC = '91';
-      function digitsE164(phone){ if(!phone) return ''; let d = String(phone).replace(/\D/g,''); if(d.length === 10) d = DEFAULT_CC + d; return d; }
-      const waNumber = digitsE164(SITE_PHONE);
-
-      $$('.card').forEach(card => {
-        const priceUsd = parseFloat(card.dataset.priceUsd || '0');
-        let origRaw, sellRaw, origRounded, sellRounded;
-
-        if(card.dataset.product === 'Single Bottle'){
-          origRaw = BASE_ORIGINAL;
-          sellRaw = BASE_SELL;
-          origRounded = 350;
-          sellRounded = 249;
+      const BASE_USD=4.67,BASE_ORIGINAL=350,BASE_SELL=250,BASE_DISCOUNT_FRAC=(BASE_ORIGINAL-BASE_SELL)/BASE_ORIGINAL,DEFAULT_CC='91';
+      function digitsE164(phone){if(!phone)return'';let d=String(phone).replace(/\D/g,'');if(d.length===10)d=DEFAULT_CC+d;return d}
+      const waNumber=digitsE164(SITE_PHONE);
+      $$('.card').forEach(card=>{
+        const priceUsd=parseFloat(card.dataset.priceUsd||'0');
+        let origRaw,sellRaw,origRounded,sellRounded;
+        if(card.dataset.product==='Single Bottle'){
+          origRaw=BASE_ORIGINAL; sellRaw=BASE_SELL; origRounded=350; sellRounded=249;
         } else {
-          const rawOrig = Math.round((priceUsd / BASE_USD) * BASE_ORIGINAL);
-          origRaw = rawOrig;
-          sellRaw = Math.round(rawOrig * (1 - BASE_DISCOUNT_FRAC));
-          origRounded = nicePrice(origRaw);
-          sellRounded = nicePrice(sellRaw);
-          if(sellRounded >= origRounded){
-            sellRounded = (origRounded < 100) ? Math.max(9, origRounded - 10) : Math.max(99, origRounded - 100);
-            if(sellRounded >= origRounded) sellRounded = origRounded - 1;
-          }
+          const rawOrig=Math.round((priceUsd/BASE_USD)*BASE_ORIGINAL);
+          origRaw=rawOrig; sellRaw=Math.round(rawOrig*(1-BASE_DISCOUNT_FRAC));
+          origRounded=nicePrice(origRaw); sellRounded=nicePrice(sellRaw);
+          if(sellRounded>=origRounded){sellRounded=(origRounded<100)?Math.max(9,origRounded-10):Math.max(99,origRounded-100); if(sellRounded>=origRounded)sellRounded=origRounded-1}
         }
-
-        const saveShown = Math.max(0, origRounded - sellRounded);
-        const priceCurrent = card.querySelector('.price-current');
-        const priceOriginal = card.querySelector('.price-original');
-        const saveEls = card.querySelectorAll('.save-amount');
-        if(priceCurrent) priceCurrent.textContent = '₹' + fmtINR(sellRounded);
-        if(priceOriginal) priceOriginal.textContent = '₹' + fmtINR(origRounded);
-        saveEls.forEach(el => el.textContent = '₹' + fmtINR(saveShown));
-
-        let qty = 1;
-        const numEl = card.querySelector('.num');
-        const dec = card.querySelector('.dec');
-        const inc = card.querySelector('.inc');
-        const orderBtn = card.querySelector('.order-btn');
-
-        function buildWA(q){
-          const effectiveQty = (Number(q) || 0) + 1;
-          const total = sellRaw * effectiveQty;
-          const msg = `Hello, I want to order ${q} × ${card.dataset.product} (Total ₹${fmtINR(total)}).`;
-          return waNumber ? `${WA_BASE}?phone=${encodeURIComponent(waNumber)}&text=${encodeURIComponent(msg)}` : `https://wa.me/${encodeURIComponent(SITE_PHONE)}?text=${encodeURIComponent(msg)}`;
-        }
-
-        function update(){
-          if(numEl) numEl.textContent = qty;
-          if(orderBtn) orderBtn.dataset.wa = buildWA(qty);
-        }
-
-        dec?.addEventListener('click', () => { qty = Math.max(1, qty - 1); update(); });
-        inc?.addEventListener('click', () => { qty = Math.min(999, qty + 1); update(); });
-        orderBtn?.addEventListener('click', () => { const wa = orderBtn.dataset.wa; if(wa) window.open(wa, '_blank', 'noopener'); else alert('WhatsApp link not available.'); });
-
+        const saveShown=Math.max(0,origRounded-sellRounded);
+        const priceCurrent=card.querySelector('.price-current'),priceOriginal=card.querySelector('.price-original'),saveEls=card.querySelectorAll('.save-amount');
+        if(priceCurrent)priceCurrent.textContent='₹'+fmtINR(sellRounded); if(priceOriginal)priceOriginal.textContent='₹'+fmtINR(origRounded);
+        saveEls.forEach(el=>el.textContent='₹'+fmtINR(saveShown));
+        let qty=1; const numEl=card.querySelector('.num'),dec=card.querySelector('.dec'),inc=card.querySelector('.inc'),orderBtn=card.querySelector('.order-btn');
+        function buildWA(q){ const effectiveQty=(Number(q)||0); const total=sellRaw*effectiveQty; const msg=`Hello, I want to order ${q} × ${card.dataset.product} (Total ₹${fmtINR(total)}).`; return waNumber?`${WA_BASE}?phone=${encodeURIComponent(waNumber)}&text=${encodeURIComponent(msg)}`:`https://wa.me/${encodeURIComponent(SITE_PHONE)}?text=${encodeURIComponent(msg)}` }
+        function update(){ if(numEl)numEl.textContent=qty; if(orderBtn)orderBtn.dataset.wa=buildWA(qty) }
+        dec?.addEventListener('click',()=>{qty=Math.max(1,qty-1);update()}); inc?.addEventListener('click',()=>{qty=Math.min(999,qty+1);update()});
+        orderBtn?.addEventListener('click',()=>{const wa=orderBtn.dataset.wa; if(wa)window.open(wa,'_blank','noopener'); else alert('WhatsApp link not available.')});
         update();
       });
     })();
-
-    function subscribe(){ const input = $('#emailInput'); const email = input?.value?.trim(); if(!email){ input?.focus(); return alert('Please enter your email.'); } input.value = ''; alert('Thanks — you are subscribed!'); }
-    function openSocial(url){ window.open(url, '_blank', 'noopener'); }
-    $$('.social-btn').forEach(btn => btn.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); } }));
+    function subscribe(){const input=$('#emailInput');const email=input?.value?.trim();if(!email){input?.focus();return alert('Please enter your email.')}input.value='';alert('Thanks — you are subscribed!')}
+    function openSocial(url){window.open(url,'_blank','noopener')}
+    $$('.social-btn').forEach(btn=>btn.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();btn.click()}}));
   </script>
 </body>
 </html>
